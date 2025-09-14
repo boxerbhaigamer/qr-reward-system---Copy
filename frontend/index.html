@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Code Generator</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.7/dist/umd/supabase.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-semibold mb-6 text-center text-gray-800">QR Code Generator</h1>
+
+    <div class="mb-4">
+      <label for="category" class="block mb-2 text-gray-700">Reward Category</label>
+      <select id="category" class="w-full border rounded-lg px-4 py-2">
+        <option value="Car">Car</option>
+        <option value="Bike">Bike</option>
+        <option value="Health">Health</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="count" class="block mb-2 text-gray-700">Number of QR Codes</label>
+      <input
+        type="number"
+        id="count"
+        value="10"
+        min="1"
+        class="w-full border rounded-lg px-4 py-2"
+      />
+    </div>
+
+    <button
+      id="generateBtn"
+      class="bg-blue-600 hover:bg-blue-700 text-white w-full py-2 rounded-lg"
+    >
+      Generate QR Codes
+    </button>
+
+    <div id="loading" class="hidden text-center text-gray-600 mt-4">Generating...</div>
+
+    <div id="previewArea" class="grid grid-cols-2 gap-4 mt-4 hidden"></div>
+
+    <div id="downloadArea" class="mt-4 hidden flex gap-2">
+      <button
+        id="downloadZipBtn"
+        class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg flex-1"
+      >
+        Download ZIP
+      </button>
+      <button
+        id="downloadCSVBtn"
+        class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg flex-1"
+      >
+        Download CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- Your main script -->
+  <script src="script.js"></script>
+</body>
+</html>

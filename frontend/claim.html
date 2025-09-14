@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claim Reward</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.7/dist/umd/supabase.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Your claim logic -->
+  <script defer src="claim.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+    <h1 id="rewardTitle" class="text-xl font-bold mb-4">Loading reward...</h1>
+
+    <form id="claimForm" class="space-y-4 hidden">
+      <input
+        id="contactNumber"
+        type="text"
+        placeholder="Your Contact Number"
+        required
+        class="w-full border rounded-lg px-4 py-2"
+      />
+      <input
+        id="feedback"
+        type="text"
+        placeholder="Feedback (optional)"
+        class="w-full border rounded-lg px-4 py-2"
+      />
+      <button
+        type="submit"
+        class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg"
+      >
+        Submit Claim
+      </button>
+    </form>
+
+    <p id="message" class="mt-4 text-sm text-gray-600"></p>
+  </div>
+</body>
+</html>
