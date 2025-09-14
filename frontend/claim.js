@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // If not claimed and no prize assigned, assign a random prize
     if (!data.prize) {
-      // Robust category normalization
+      // Robust category normalization with debug logs
       const categoryMap = {
         car: 'Car',
         bike: 'Bike',
@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let rawCategory = (data.category || 'Car').trim().toLowerCase();
       let category = categoryMap[rawCategory] || 'Car';
       const prize = getRandomPrize(category);
+      console.log('DEBUG: rawCategory =', rawCategory, '| normalized category =', category, '| selected prize =', prize);
       if (prize) {
         // Update Supabase with the selected prize
         const { error: updateError } = await supabase
