@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Added: The list of prizes per category
   const prizesByCategory = {
-    "Car": ["Smartwatch", "Bluetooth Speaker", "Car Air Freshener", "Charging Cable", "GPS Mount"],
-    "Bike": ["Helmet", "Bike Lock", "Gloves", "Pump", "Tool Kit"],
-    "Health": ["Yoga Mat", "Water Bottle", "Smart Scale", "Jump Rope", "Towel"],
+    "Car": ["500rs", "Movie Ticket", "Car Air Freshener", "Smart Water Bottle", "Bluetooth earphones"],
+    "Bike": ["100rs", "200rs", "250rs"],
+    "Health": ["Yoga accessories", "Coffee mug", "Pharmacy coupon"],
   };
 
   function base64ToBlob(base64, mime) {
