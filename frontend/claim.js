@@ -65,10 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // If not claimed and no prize assigned, assign a random prize
     if (!data.prize) {
-      // Normalize category: capitalize first letter, trim spaces
-      let category = (data.category || 'Car').trim();
-      category = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
-      if (!(category in PRIZES)) category = 'Car';
+      // Robust category normalization
+      const categoryMap = {
+        car: 'Car',
+        bike: 'Bike',
+        health: 'Health'
+      };
+      let rawCategory = (data.category || 'Car').trim().toLowerCase();
+      let category = categoryMap[rawCategory] || 'Car';
       const prize = getRandomPrize(category);
       if (prize) {
         // Update Supabase with the selected prize
