@@ -65,25 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // If not claimed and no prize assigned, assign a random prize
     if (!data.prize) {
-      // Robust category normalization with debug logs
+      // Robust category normalization with strong fallback
       const categoryMap = {
         car: 'Car',
         bike: 'Bike',
         health: 'Health'
       };
-      let rawCategory = (data.category || 'Car').trim().toLowerCase();
+      let rawCategory = (data.category || '').trim().toLowerCase();
       let category = categoryMap[rawCategory] || 'Car';
-      const prize = getRandomPrize(category);
+      let prize = getRandomPrize(category);
+      // Fallback if prize is null or undefined
+      if (!prize) {
+        prize = 'Special Gift';
+      }
       console.log('DEBUG: rawCategory =', rawCategory, '| normalized category =', category, '| selected prize =', prize);
-      if (prize) {
-        // Update Supabase with the selected prize
-        const { error: updateError } = await supabase
-          .from("qr_codes")
-          .update({ prize })
-          .eq("qrId", claimId);
-        if (!updateError) {
-          data.prize = prize;
-        }
+      const { error: updateError } = await supabase
+        .from("qr_codes")
+        .update({ prize })
+        .eq("qrId", claimId);
+      if (!updateError) {
+        data.prize = prize;
+      } else {
+        rewardTitle.textContent = 'Error assigning prize. Please try again.';
+        return;
       }
     }
 
