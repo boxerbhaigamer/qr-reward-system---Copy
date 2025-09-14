@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const qrDataset = [];
 
   // ✅ Your Supabase details
-  const SUPABASE_URL = "https://jlxuawdjplzrvzdyjsnd.supabase.co";
-  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpseHVhd2RqcGx6cnZ6ZHlqc25kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4Mzg2NzUsImV4cCI6MjA3MzQxNDY3NX0.G-KHb-guiyadVbQhIfTH1q03ENSZpFv_G65qiThmq3k";
+  const SUPABASE_URL = "https://twizpcfwkjuqjjygrbtf.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR3aXpwY2Z3a2p1cWpqeWdyYnRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4NDI2NDUsImV4cCI6MjA3MzQxODY0NX0.fs8NpTy20yztVnygTHqkoKDG6nRlmivqs4bbm2OKRYc";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   function base64ToBlob(base64, mime) {
