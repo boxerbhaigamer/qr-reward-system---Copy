@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // If already claimed, show the prize (if any)
     if (data.claimed && data.prize) {
-      rewardTitle.textContent = `🎉 Congratulations! You won: <b>${data.prize}</b>`;
+      rewardTitle.innerHTML = `🎉 Congratulations! You won: <b>${data.prize}</b>`;
       form.classList.add("hidden");
       return;
     }
