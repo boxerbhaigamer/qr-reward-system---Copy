@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const entry = {
           qrId: claimId,
           category,
-          prize: null,
+          rewardType: `Reward for ${category}`,
           generatedAt: new Date().toISOString(),
           claimed: false,
           claimedAt: null,

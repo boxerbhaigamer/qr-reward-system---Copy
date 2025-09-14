@@ -14,38 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpseHVhd2RqcGx6cnZ6ZHlqc25kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4Mzg2NzUsImV4cCI6MjA3MzQxNDY3NX0.G-KHb-guiyadVbQhIfTH1q03ENSZpFv_G65qiThmq3k";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-
-  // Prize lists by category
-  const PRIZES = {
-    Car: [
-      "₹500",
-      "Movie ticket",
-      "Car perfume",
-      "Smart water bottle",
-      "Bluetooth",
-      "Mini car perfume",
-      "Up to ₹1000"
-    ],
-    Bike: [
-      "₹100",
-      "₹200",
-      "₹250"
-    ],
-    Health: [
-      "Yoga accessories",
-      "Pharmacy coupon",
-      "Coffee mug"
-    ]
-  };
-
-  function getRandomPrize(category) {
-    const prizes = PRIZES[category] || [];
-    if (prizes.length === 0) return null;
-    return prizes[Math.floor(Math.random() * prizes.length)];
-  }
-
   async function fetchReward() {
-    let { data, error } = await supabase
+    const { data, error } = await supabase
       .from("qr_codes")
       .select("*")
       .eq("qrId", claimId)
@@ -56,46 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // If already claimed, show the prize (if any)
-    if (data.claimed && data.prize) {
-      rewardTitle.innerHTML = `🎉 Congratulations! You won: <b>${data.prize}</b>`;
-      form.classList.add("hidden");
-      return;
-    }
-
-    // If not claimed and no prize assigned, assign a random prize
-    if (!data.prize) {
-      // Robust category normalization with strong fallback
-      const categoryMap = {
-        car: 'Car',
-        bike: 'Bike',
-        health: 'Health'
-      };
-      let rawCategory = (data.category || '').trim().toLowerCase();
-      let category = categoryMap[rawCategory] || 'Car';
-      let prize = getRandomPrize(category);
-      // Fallback if prize is null or undefined
-      if (!prize) {
-        prize = 'Special Gift';
-      }
-      console.log('DEBUG: rawCategory =', rawCategory, '| normalized category =', category, '| selected prize =', prize);
-      const { error: updateError } = await supabase
-        .from("qr_codes")
-        .update({ prize })
-        .eq("qrId", claimId);
-      if (!updateError) {
-        data.prize = prize;
-      } else {
-        rewardTitle.textContent = 'Error assigning prize. Please try again.';
-        return;
-      }
-    }
-
-    if (data.prize) {
-      rewardTitle.innerHTML = `🎉 Congratulations! You won: <b>${data.prize}</b>`;
-    } else {
-      rewardTitle.textContent = `🎉 Congratulations! You won a reward!`;
-    }
+    rewardTitle.textContent = `🎉 Congratulations! You won a ${data.rewardType}`;
     form.classList.remove("hidden");
   }
 
