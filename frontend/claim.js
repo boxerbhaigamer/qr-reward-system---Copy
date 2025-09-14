@@ -65,8 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // If not claimed and no prize assigned, assign a random prize
     if (!data.prize) {
-      // Try to get category from data (fallback to 'Car' if missing)
-      const category = data.category || 'Car';
+      // Normalize category: capitalize first letter, trim spaces
+      let category = (data.category || 'Car').trim();
+      category = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+      if (!(category in PRIZES)) category = 'Car';
       const prize = getRandomPrize(category);
       if (prize) {
         // Update Supabase with the selected prize
