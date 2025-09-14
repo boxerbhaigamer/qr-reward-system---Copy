@@ -11,10 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let zip;
   const qrDataset = [];
 
-  // ✅ Your Supabase details
+  // Your Supabase details
   const SUPABASE_URL = "https://jlxuawdjplzrvzdyjsnd.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpseHVhd2RqcGx6cnZ6ZHlqc25kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4Mzg2NzUsImV4cCI6MjA3MzQxNDY3NX0.G-KHb-guiyadVbQhIfTH1q03ENSZpFv_G65qiThmq3k";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Added: The list of prizes per category
+  const prizesByCategory = {
+    "Car": ["Smartwatch", "Bluetooth Speaker", "Car Air Freshener", "Charging Cable", "GPS Mount"],
+    "Bike": ["Helmet", "Bike Lock", "Gloves", "Pump", "Tool Kit"],
+    "Health": ["Yoga Mat", "Water Bottle", "Smart Scale", "Jump Rope", "Towel"],
+  };
 
   function base64ToBlob(base64, mime) {
     const byteChars = atob(base64.split(",")[1]);
@@ -56,10 +63,21 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadArea.classList.add("hidden");
     generateBtn.disabled = true;
     zip = new JSZip();
+    qrDataset.length = 0;
+
+    const prizes = prizesByCategory[category];
+    if (!prizes || prizes.length === 0) {
+      alert(`No prizes defined for the category: ${category}`);
+      loadingDiv.classList.add("hidden");
+      generateBtn.disabled = false;
+      return;
+    }
 
     for (let i = 0; i < count; i++) {
       const claimId = generateUniqueId();
-      const url = `https://qr-reward-system.vercel.app/claim.html?claimId=${claimId}&category=${category}`;
+      const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
+
+      const url = `https://qr-reward-system.vercel.app/claim.html?claimId=${claimId}`;
       const base64Url = await createQrCode(url);
 
       if (base64Url) {
@@ -73,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const entry = {
           qrId: claimId,
           category,
-          rewardType: `Reward for ${category}`,
+          rewardType: randomPrize,
           generatedAt: new Date().toISOString(),
           claimed: false,
           claimedAt: null,
@@ -83,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         qrDataset.push(entry);
 
-        // ✅ Save to Supabase
         await saveToSupabase(entry);
       }
     }

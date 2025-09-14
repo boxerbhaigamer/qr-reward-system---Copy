@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const claimId = params.get("claimId");
 
-  // ✅ Supabase details
+  // Supabase details
   const SUPABASE_URL = "https://jlxuawdjplzrvzdyjsnd.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpseHVhd2RqcGx6cnZ6ZHlqc25kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4Mzg2NzUsImV4cCI6MjA3MzQxNDY3NX0.G-KHb-guiyadVbQhIfTH1q03ENSZpFv_G65qiThmq3k";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -22,11 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
       .single();
 
     if (error || !data) {
-      rewardTitle.textContent = "QR code not found or expired.";
+      rewardTitle.textContent = "QR code not found or already claimed.";
       return;
     }
+    
+    // Added: Check if the prize has already been claimed
+    if (data.claimed) {
+        rewardTitle.textContent = "This prize has already been claimed.";
+        return;
+    }
 
-    rewardTitle.textContent = `🎉 Congratulations! You won a ${data.rewardType}`;
+    // Updated: Use the 'rewardType' column from the fetched data
+    rewardTitle.textContent = `🎉 Congratulations! You won a ${data.rewardType}!`;
     form.classList.remove("hidden");
   }
 
