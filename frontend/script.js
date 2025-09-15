@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const qrDataset = [];
 
   // Your Supabase details
-  const SUPABASE_URL = "https://jlxuawdjplzrvzdyjsnd.supabase.co";
-  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpseHVhd2RqcGx6cnZ6ZHlqc25kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4Mzg2NzUsImV4cCI6MjA3MzQxNDY3NX0.G-KHb-guiyadVbQhIfTH1q03ENSZpFv_G65qiThmq3k";
+  const SUPABASE_URL = "https://agcijyvcagktcgvyxtyw.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2lqeXZjYWdrdGNndnl4dHl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5Mzk0MjQsImV4cCI6MjA3MzUxNTQyNH0.LE-wX8cgEOJ1HW1w01htoEolOsopCvoZWQ30SlIGzI0";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   // Added: The list of prizes per category
