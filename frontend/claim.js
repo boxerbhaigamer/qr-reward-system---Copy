@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rewardTitle = document.getElementById("rewardTitle");
   const form = document.getElementById("claimForm");
   const message = document.getElementById("message");
-  const contactInput = document.getElementById("contactNumber");
+  const contactInput = document.getElementById("contactName");
   const feedbackInput = document.getElementById("feedback");
 
   // Get QR parameters from URL
