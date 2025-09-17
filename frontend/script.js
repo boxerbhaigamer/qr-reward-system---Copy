@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
           generatedAt: new Date().toISOString(),
           claimed: false,
           claimedAt: null,
-          contactNumber: null,
+          name: null,
           feedback: null,
         };
 
