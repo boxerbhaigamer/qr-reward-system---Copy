@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const contactNumber = contactInput.value.trim();
+    const contactName = contactInput.value.trim();
     const feedback = feedbackInput.value.trim();
 
-    if (!contactNumber) {
-      alert("Please enter your contact number.");
+    if (!contactName) {
+      alert("Please enter your full name.");
       return;
     }
 
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .update({
         claimed: true,
         claimedAt: new Date().toISOString(),
-        contactNumber,
+         name: contactName, // Updated to use 'name' field 
         feedback,
       })
       .eq("qrId", claimId);
