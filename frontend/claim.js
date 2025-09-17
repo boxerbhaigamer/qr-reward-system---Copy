@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .update({
         claimed: true,
         claimedAt: new Date().toISOString(),
-         name: contactName, // Updated to use 'name' field 
+        name: contactName, // Updated to use 'name' field 
         feedback,
       })
       .eq("qrId", claimId);
