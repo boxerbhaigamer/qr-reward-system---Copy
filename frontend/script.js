@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Added: The list of prizes per category
   const prizesByCategory = {
     "Car": ["500rs", "Movie Ticket", "Car Air Freshener", "Smart Water Bottle", "Bluetooth earphones"],
-    "Bike": ["100rs", "200rs", "250rs"],
+    "Bike": ["100rs", "50rs"],
     "Health": ["Yoga accessories", "Coffee mug", "Pharmacy coupon"],
   };
 
